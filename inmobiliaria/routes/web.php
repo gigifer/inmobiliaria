@@ -16,3 +16,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('avisos', 'avisosController')->middleware('auth');
+
+Auth::routes(['register'=>false, 'reset'=>false]);
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::post('contacto', 'EmailsController@store');
+
+Route::view('/contacto', 'contacto');
+
+Route:: get('/', 'CatalogoController@index');
