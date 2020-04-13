@@ -8,8 +8,7 @@ use App\Mail\MensajeContacto;
 
 class EmailsController extends Controller
 {
-    public function store(Request $request){
-
+    public function recieveData(Request $request){
       $validacion = [
           'nombre' => 'required|string|max:200',
           'email' => 'required|email',
@@ -26,8 +25,10 @@ class EmailsController extends Controller
 
       $this->validate($request, $validacion, $error);
 
-      Mail::to('morellinoriega@gmail.com')->send(new MensajeContacto($mensaje));
-
-      return "Mensaje enviado";
+      return response()->json(['success'=>'Mensaje enviado'], 200);
+      // //
+      // // Mail::to('morellinoriega@gmail.com')->send(new MensajeContacto($mensaje));
+      //
+      // return "Mensaje enviado";
     }
 }

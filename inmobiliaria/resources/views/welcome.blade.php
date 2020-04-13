@@ -68,20 +68,6 @@
                 margin-bottom: 30px;
             }
 
-
-
-            .destacado{
-              overflow: hidden;
-            }
-
-            .destacado-derecha{
-              float: left;
-            }
-
-            .destacado-izquierda{
-              float: left;
-            }
-
             .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
               background-color: #F39C12;
             }
@@ -136,48 +122,6 @@
           </div>
       </div>
         </div>
-        <div class="container destacado mb-5">
-          <div class="row">
-            <div class="col-sm-3">
-
-            </div>
-
-            <div class="destacado-foto col-sm-5" style="height: 350px;">
-              <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                  <div class="carousel-inner">
-                    <div class="carousel-item active">
-                      <img class="d-block w-100" style="height: 350px;" src="{{ asset('img/depa.jpg')}}" alt="First slide">
-                    </div>
-                    <div class="carousel-item">
-                      <img class="d-block w-100" style="height: 350px;" src="{{ asset('img/depa.jpg')}}" alt="Second slide">
-                    </div>
-                    <div class="carousel-item">
-                      <img class="d-block w-100" style="height: 350px;" src="{{ asset('img/depa.jpg')}}" alt="Third slide">
-                    </div>
-                  </div>
-                  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                  </a>
-                  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                  </a>
-                </div>
-              </div>
-
-            <div class="card destacado-texto col-sm-4" style="height: 350px;">
-              <div class="card-header bg-white text-center font-weight-bold">
-                DESTACADO
-              </div>
-              <div class="card-body">
-                <h5 class="card-title">Special title treatment</h5>
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn botones">ver mas </a>
-              </div>
-            </div>
-          </div>
-        </div>
 
         <div class="row principal">
           <div class="col-3">
@@ -192,48 +136,60 @@
           <div class="col-9">
             <div class="tab-content" id="v-pills-tabContent">
               <div class="tab-pane fade show active" id="v-pills-alquiler" role="tabpanel" aria-labelledby="v-pills-alquiler-tab">
-                <div class="row">
+                <div class="row row-cols-1 row-cols-md-4">
                   @foreach ($avisosAlquiler as $item)
-                      <div class="card md-col-2">
-                        <img src="{{ asset('storage').'/'.$item->foto}}" alt="" width="200" class="">
-                        <div class="card-body">
-                          <h5 class="card-title">{{$item->titulo}}</h5>
-                          <p class="card-text">{{$item->descripcion}}</p>
-                          <p>{{$item->precio}}</p>
-                          <a href="{{$item->id}}"><button type="button" class="btn botones">VER MÁS</button></a>
+                  <div class="col mb-4">
+                    <div class="card h-100 shadow-sm">
+                      <img src="{{ asset('storage').'/'.$item->foto}}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title text-center">{{$item->titulo}}</h5>
+                        <p class="card-text text-center">{{$item->descripcion}}</p>
+                        <p class="">{{$item->precio}}</p>
+                        <div class="d-flex justify-content-end">
+                          <a href="{{url('detalleAviso',$item->id)}}"><button type="button" class="btn botones">VER MÁS</button></a>
                         </div>
-                       </div>
-                      @endforeach
+                      </div>
+                    </div>
+                  </div>
+                 @endforeach
                 </div>
               </div>
               <div class="tab-pane fade" id="v-pills-venta" role="tabpanel" aria-labelledby="v-pills-venta-tab">
-                <div class="row">
+                <div class="row row-cols-1 row-cols-md-4">
                   @foreach ($avisosVenta as $item)
-                      <div class="card md-col-2">
-                        <img src="{{ asset('storage').'/'.$item->foto}}" alt="" width="200" class="">
-                        <div class="card-body">
-                          <h5 class="card-title">{{$item->titulo}}</h5>
-                          <p class="card-text">{{$item->descripcion}}</p>
-                          <p>{{$item->precio}}</p>
-                          <a href="{{$item->id}}"><button type="button" class="btn botones">VER MÁS</button></a>
+                  <div class="col mb-4">
+                    <div class="card h-100 shadow-sm">
+                      <img src="{{ asset('storage').'/'.$item->foto}}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title text-center">{{$item->titulo}}</h5>
+                        <p class="card-text text-center">{{$item->descripcion}}</p>
+                        <p class="">{{$item->precio}}</p>
+                        <div class="d-flex justify-content-end">
+                          <a href="{{url('detalleAviso',$item->id)}}"><button type="button" class="btn botones">VER MÁS</button></a>
                         </div>
-                       </div>
-                      @endforeach
+                      </div>
+                    </div>
+                  </div>
+                 @endforeach
                 </div>
               </div>
               <div class="tab-pane fade" id="v-pills-temporarios" role="tabpanel" aria-labelledby="v-pills-temporarios-tab">
-                <div class="row">
+                <div class="row row-cols-1 row-cols-md-4">
                   @foreach ($avisosTemporario as $item)
-                      <div class="card md-col-2">
-                        <img src="{{ asset('storage').'/'.$item->foto}}" alt="" width="200" class="">
-                        <div class="card-body">
-                          <h5 class="card-title">{{$item->titulo}}</h5>
-                          <p class="card-text">{{$item->descripcion}}</p>
-                          <p>{{$item->precio}}</p>
-                          <a href="{{$item->id}}"><button type="button" class="btn botones">VER MÁS</button></a>
+                  <div class="col mb-4">
+                    <div class="card h-100 shadow-sm">
+                      <img src="{{ asset('storage').'/'.$item->foto}}" class="card-img-top" alt="...">
+                      <div class="card-body">
+                        <h5 class="card-title text-center">{{$item->titulo}}</h5>
+                        <p class="card-text text-center">{{$item->descripcion}}</p>
+                        <p class="">{{$item->precio}}</p>
+                        <div class="d-flex justify-content-end">
+                          <a href="{{url('detalleAviso',$item->id)}}"><button type="button" class="btn botones">VER MÁS</button></a>
                         </div>
-                       </div>
-                      @endforeach
+                      </div>
+                    </div>
+                  </div>
+                 @endforeach
                 </div>
               </div>
               <div class="tab-pane fade" id="v-pills-tasaciones" role="tabpanel" aria-labelledby="v-pills-tasaciones-tab">
@@ -260,15 +216,12 @@
                     <i class="fas fa-envelope-square"></i> Mn.bienesinmuebles@gmail.com
                   </div>
 
-                  @include('contacto')
-
-
                 </div>
 
               </div>
               <div class="tab-pane fade" id="v-pills-contacto" role="tabpanel" aria-labelledby="v-pills-contacto-tab">
                 <div id="contacto">
-                  @include('contacto')
+                  @include('contactoVista')
                 </div>
               </div>
             </div>
@@ -276,8 +229,8 @@
           </div>
         </div>
 
-
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        {{-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> --}}
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     </body>

@@ -23,8 +23,10 @@ Auth::routes(['register'=>false, 'reset'=>false]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('contacto', 'EmailsController@store');
+Route::post('controladorContacto', 'EmailsController@recieveData')->name('controladorContacto');
 
-Route::view('/contacto', 'contacto');
+Route::view('/contactoVista', 'contactoVista');
 
 Route:: get('/', 'CatalogoController@index');
+
+Route::get('/detalleAviso/{id}', 'CatalogoController@show');

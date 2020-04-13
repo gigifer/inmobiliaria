@@ -25,4 +25,10 @@ class CatalogoController extends Controller
 
       return view('/welcome',compact('avisosTemporario', 'avisosVenta', 'avisosAlquiler'));
   }
+
+  public function show($id)
+  {
+    $aviso = aviso::findOrFail($id);
+    return view('detalleAviso',compact('aviso'));
+  }
 }
