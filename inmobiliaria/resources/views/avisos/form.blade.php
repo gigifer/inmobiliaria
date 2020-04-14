@@ -1,6 +1,6 @@
 <div class="form-group {{ $errors->has('foto') ? 'has-error' : ''}}">
     <label for="foto" class="control-label">{{ 'Foto' }}</label>
-    <input class="form-control" name="foto" type="file" id="foto" value="{{ isset($aviso->foto) ? $aviso->foto : ''}} {{ old('foto')}}" >
+    <input class="form-control" name="foto[]" multiple type="file" id="foto" value="{{ isset($aviso->foto) ? $aviso->foto : ''}} {{ old('foto')}}" >
 </div>
 <div class="form-group {{ $errors->has('titulo') ? 'has-error' : ''}}">
     <label for="titulo" class="control-label">{{ 'Titulo' }}</label>
