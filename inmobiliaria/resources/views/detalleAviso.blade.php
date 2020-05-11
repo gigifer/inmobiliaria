@@ -1,90 +1,86 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.header_y_footer')
 
-    <title>Morelli Noriega</title>
-
-    <!--Links -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <script src="https://kit.fontawesome.com/acf02b5d89.js" crossorigin="anonymous"></script>
-  </head>
-  <body>
-
-    <style>
-      #logo{
-        width: 100%;
-        height: 300px;
-      }
-
-    </style>
-
-    <div class="container-fluid">
-        <div class="title m-b-md">
-            <img id="logo" src="{{ asset('img/logo.jpeg') }}" alt="logo">
-        </div>
-    </div>
-
-    <div class="container mb-5 mt-5">
-      <div class="row">
-      <div class="col-md-6" style="height: 350px;">
+@section('content')
+  <div class="container mb-5 mt-5">
+    <div class="row">
+      <div class="col-12 text-center mb-4 font-weight-bold nombreAviso">
+        {{ $aviso['titulo']}}
+      </div>
+      <div class=" col-ms-12 col-md-6 mb-4">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-            <div class="carousel-inner">
-              <div class="carousel-item active">
-                <img class="d-block w-100" style="height: 350px;" src="{{ asset('storage').'/'.$aviso->foto}}" alt="First slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" style="height: 350px;" src="{{ asset('img/depa.jpg')}}" alt="Second slide">
-              </div>
-              <div class="carousel-item">
-                <img class="d-block w-100" style="height: 350px;" src="{{ asset('img/depa.jpg')}}" alt="Third slide">
-              </div>
+          <div class="carousel-inner">
+              @foreach ($fotoCarrusel as $foto)
+                <div class="carousel-item {{ $loop->first ? ' active' : '' }}">
+                  <img class="d-block w-100" src="{{ asset('storage').'/'.$foto['ruta']}}" alt="Third slide">
+                </div>
+              @endforeach
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-              <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              <span class="sr-only">Next</span>
-            </a>
-          </div>
-        </div>
-
-        <div class="card h-100 shadow-sm col-sm-6" style="height: 350px;">
-          <div class="card-header bg-white text-center font-weight-bold">
-            {{$aviso->titulo}}
-          </div>
-          <div class="card-body">
-            <p class="card-text">Direccion</p>
-            <p class="card-text">Localidad</p><br>
-            <p class="card-text">{{$aviso->descripcion}}</p><br>
-            <p class="card-text">Características:</p>
-            <p>-cocina</p>
-            <p>-dormitorios</p>
-            <p>-baños</p>
-            <p>${{$aviso->precio}}</p>
-            <p>-gastos</p>
-          </div>
+          <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+          </a>
+          <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+          </a>
         </div>
       </div>
+
+      <div class="col-sm-12 col-md-5 letra boxDetalle" id="detalle">
+        <p class="font-weight-bold">Detalle</p>
+        <hr>
+        <p>-Dirección: 9 de julio 345</p>
+        <p>-Localidad: Córdoba</p>
+        <p>-Cocina:</p>
+        <p>-Dormitorios:</p>
+        <p>-Baños:</p>
+        <p>-Precio: ${{$aviso['precio']}}</p>
+        <p>-Gastos:</p>
+      </div>
+      <div class="col-sm-12 col-md-11 offset-md-1 boxDetalle letra mt-3">
+        <p class="font-weight-bold">Descripción</p>
+        <hr>
+        <p>
+          {{$aviso['descripcion']}}
+        </p>
+      </div>
     </div>
+  </div>
 
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
-          <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6809.492450631561!2d-64.17897164255979!3d-31.421117307068897!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sar!4v1586818156602!5m2!1ses!2sar" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
-        </div>
-        <div class="col-md-6">
+        <div class="col-sm-12 col-md-6">
+          <script>
+          fetch("https://maps.googleapis.com/maps/api/geocode/json?address=1600+Amphitheatre+Parkway,+Mountain+View,+CA&key=YOUR_API_KEY")
+            .then(function(response) {
+            return response.json();
+          })
+          .then(function(json) {
+          })
+          </script>
+          <!--The div element for the map -->
+          <div id="map"></div>
+          <script>
+          // Initialize and add the map
+          function initMap() {
+            // The location of Uluru
+            var uluru = {lat: -25.344, lng: 131.036};
+            // The map, centered at Uluru
+            var map = new google.maps.Map(
+                document.getElementById('map'), {zoom: 20, center: uluru});
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({position: uluru, map: map});
+          }
+              </script>
+              <script async defer
+              src="https://maps.googleapis.com/maps/api/js?AIzaSyBDSbU8x3ZN1HaiaKNnGBQO7VvLN23VDM8&callback=initMap">
+              </script>
+            </div>
+        <div class="col-sm-12 col-md-6 pt-3">
+          <p class="letra font-weight-bold text-center">¿Querés saber más?</p>
           @include('contactoVista')
         </div>
       </div>
     </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  {{-- <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script> --}}
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
-  </body>
-</html>
+  @stop

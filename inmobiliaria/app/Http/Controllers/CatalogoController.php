@@ -5,30 +5,31 @@ use app\Providers;
 use Illuminate\Http\Request;
 use App\aviso;
 use App\Categoria;
+use App\Foto;
 use Illuminate\Support\Facades\Storage;
 
 class CatalogoController extends Controller
 {
   public function index()
   {
-      $avisosVenta=aviso::where('id_categoria', '1')
-      ->join('categorias','id_categoria', '=', 'categorias.id')
-      ->get();
-
-      $avisosAlquiler=aviso::where('id_categoria', '2')
-      ->join('categorias','id_categoria', '=', 'categorias.id')
-      ->get();
-
-      $avisosTemporario=aviso::where('id_categoria', '3')
-      ->join('categorias','id_categoria', '=', 'categorias.id')
-      ->get();
-
-      return view('/welcome',compact('avisosTemporario', 'avisosVenta', 'avisosAlquiler'));
+    $avisosAlquiler=aviso::where('id_categoria', '2')->get();
+    return view('/welcome',compact('avisosAlquiler'));
   }
 
+  public function venta(){
+    $avisosVenta = aviso::where('id_categoria', '1')->get();
+    return view('/venta', compact('avisosVenta'));
+  }
+
+  public function temporario(){
+    $avisosTemporario=aviso::where('id_categoria', '3')->get();
+    return view('/temporario', compact('avisosTemporario'));
+  }
+  
   public function show($id)
   {
-    $aviso = aviso::findOrFail($id);
-    return view('detalleAviso',compact('aviso'));
+    $aviso = aviso::where('id', strval($id))->first();
+    $fotoCarrusel = $aviso->foto;
+    return view('detalleAviso',compact('aviso', 'fotoCarrusel'));
   }
 }

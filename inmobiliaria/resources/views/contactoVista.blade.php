@@ -3,9 +3,9 @@
     font-size: 20px;
   }
 </style>
-<div class="container">
-  <div class="row row justify-content-md-center">
-    <form id="datosFormulario" class="col-md-10" data-route="{{ url('controladorContacto') }}" method="post">
+<div class="container letra-clara">
+  <div class="row justify-content-md-center pt-3">
+    <form id="datosFormulario" class="col-md-10 ml-auto" data-route="{{ url('controladorContacto') }}" method="post">
         @csrf
         <div class="form-group col-md-10 valid-feedback" id="mensajeExito">
           <span class=" ">
@@ -47,6 +47,4 @@
   </div>
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="{{asset('js/datosContacto.js')}}" type="text/javascript">
-
-</script>
+<script src="{{asset('js/datosContacto.js')}}" type="text/javascript"></script>

@@ -29,4 +29,10 @@ Route::view('/contactoVista', 'contactoVista');
 
 Route:: get('/', 'CatalogoController@index');
 
-Route::get('/detalleAviso/{id}', 'CatalogoController@show');
+Route::get('/detalleAviso/{id}', [
+    'as'=>'aviso-detalle',
+    'uses'=>'catalogoController@show']);
+
+Route::get('/ventaRuta', 'CatalogoController@venta');
+
+Route::get('/temporarioRuta', 'CatalogoController@temporario');

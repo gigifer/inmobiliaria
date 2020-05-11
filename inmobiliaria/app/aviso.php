@@ -25,11 +25,15 @@ class aviso extends Model
      *
      * @var array
      */
-    protected $fillable = ['foto', 'titulo', 'descripcion', 'precio', 'id_categoria'];
+    protected $fillable = ['titulo', 'descripcion', 'precio', 'id_categoria'];
 
     public function categoria(){
         return $this->belongsTo(Categoria::class,'id_categoria');
     }
 
+    public function foto()
+    {
+        return $this->hasMany(Foto::class);
+    }
 
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Categoria;
 use App\aviso;
+use\App\Foto;
 use Illuminate\Http\Request;
 
 class avisosController extends Controller
@@ -21,12 +22,12 @@ class avisosController extends Controller
         $perPage = 25;
 
         if (!empty($keyword)) {
-            $avisos = aviso::where('foto', 'LIKE', "%$keyword%")
-                ->orWhere('titulo', 'LIKE', "%$keyword%")
+            $avisos = aviso::where('titulo', 'LIKE', "%$keyword%")
                 ->orWhere('descripcion', 'LIKE', "%$keyword%")
                 ->latest()->paginate($perPage);
         } else {
-            $avisos = aviso::latest()->paginate($perPage);
+            $fotos = [];
+            $avisos = aviso::latest()->paginate($perPage)->all();
         }
 
         return view('avisos.index', compact('avisos'));
@@ -40,6 +41,7 @@ class avisosController extends Controller
     public function create()
     {
         $categorias = Categoria::all();
+
         return view('avisos.create', compact('categorias'));
     }
 
@@ -57,7 +59,7 @@ class avisosController extends Controller
           'titulo' => 'required|string|max:200',
           'descripcion' => 'required|string|max:500',
           'precio' => 'required',
-          'foto' => 'required|max:10000|mimes:jpeg,png,jpg,bmp'
+          //'foto' => 'required|max:10000|mimes:jpeg,png,jpg,bmp'
       ];
 
       $mensaje = [
@@ -69,13 +71,22 @@ class avisosController extends Controller
 
       $this->validate($request, $validacion, $mensaje);
 
-        $requestData = $request->all();
-                if ($request->hasFile('foto')) {
-            $requestData['foto'] = $request->file('foto')
-                ->store('uploads', 'public');
-        }
+      $requestData = $request->all();
 
-        aviso::create($requestData);
+      $nuevo_aviso = aviso::create($requestData);
+      $id_aviso_nuevo = $nuevo_aviso->id;
+
+      $requestData['aviso_id'] = $id_aviso_nuevo;
+
+      if ($request->hasFile('foto')) {
+        $files = $request->file('foto');
+        foreach ($files as $file) {
+          $requestData['ruta'] = $file
+          ->store('uploads', 'public');
+
+          Foto::create($requestData);
+        }
+      }
 
         return redirect('avisos')->with('flash_message', 'aviso added!');
     }

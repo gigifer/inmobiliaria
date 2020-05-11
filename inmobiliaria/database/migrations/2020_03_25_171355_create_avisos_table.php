@@ -15,10 +15,9 @@ class CreateAvisosTable extends Migration
         Schema::create('avisos', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('foto')->nullable();
             $table->string('titulo')->nullable();
             $table->string('descripcion')->nullable();
-            $table->float('precio', 8, 2);	
+            $table->float('precio', 8, 2);
             $table->unsignedBigInteger('id_categoria');
             $table->foreign('id_categoria')->references('id')->on('categorias');
             });

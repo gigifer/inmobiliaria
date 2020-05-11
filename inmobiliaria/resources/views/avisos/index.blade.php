@@ -42,12 +42,13 @@
                                 @foreach($avisos as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td><img src="{{ asset('storage').'/'.$item->foto}}" alt="" width="200"></td>
-                                        <td>{{ $item->titulo }}</td>
-                                        <td>{{ $item->descripcion }}</td>
-                                        <td><?php echo number_format((float) $item->precio, 2, '.', ''); ?></td>
+                                        <td><img src="{{ asset('storage').'/'. $item->foto[0]['ruta'] }}" alt="" width="200"></td>
+                                        <td>{{ $item['titulo'] }}</td>
+                                        <td>{{ $item['descripcion'] }}</td>
+                                        <td><?php echo number_format((float) $item['precio'], 2, '.', ''); ?></td>
                                         <td>{{ $item->categoria["nombre"] }}</td>
                                         <td>
+                                          <td>
                                             <a href="{{ url('/avisos/' . $item->id) }}" title="View aviso"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Ver</button></a>
                                             <a href="{{ url('/avisos/' . $item->id . '/edit') }}" title="Edit aviso"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Editar</button></a>
 
@@ -61,9 +62,8 @@
                                 @endforeach
                                 </tbody>
                             </table>
-                            <div class="pagination-wrapper"> {!! $avisos->appends(['search' => Request::get('search')])->render() !!} </div>
                         </div>
-
+                        <div class="pagination-wrapper"> {!! array_push($avisos, ['search' => Request::get('search')]) !!} </div>
                     </div>
                 </div>
             </div>
