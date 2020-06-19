@@ -25,7 +25,7 @@ class aviso extends Model
      *
      * @var array
      */
-    protected $fillable = ['titulo', 'descripcion', 'precio', 'id_categoria'];
+    protected $fillable = ['titulo', 'descripcion', 'precio', 'id_categoria', 'direccion', 'localidad', 'cocina', 'dormitorios', 'banios', 'gastos', 'lat', 'lng'];
 
     public function categoria(){
         return $this->belongsTo(Categoria::class,'id_categoria');

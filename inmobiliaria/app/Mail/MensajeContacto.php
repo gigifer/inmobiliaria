@@ -12,16 +12,16 @@ class MensajeContacto extends Mailable
     use Queueable, SerializesModels;
 
     public $asunto = 'Mensaje recibido';
-    public $msj;
+    public $mensaje;
 
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($msj)
+    public function __construct($mensaje)
     {
-        $this->msj = $msj;
+        $this->mensaje = $mensaje;
     }
 
     /**
@@ -31,6 +31,6 @@ class MensajeContacto extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.mensajeRecibido');
+
     }
 }

@@ -27,7 +27,7 @@
                                         <th>ID</th><td>{{ $aviso->id }}</td>
                                     </tr>
                                     <tr>
-                                      <th> Foto </th><td> <img src="{{ asset('storage').'/'.$aviso->foto}}" alt="" width="200"> </td>
+                                      <th> Foto </th><td> <img src="{{ asset('storage').'/'.$aviso->foto[0]['ruta']}}" alt="" width="200"> </td>
                                     </tr>
                                     <tr>
                                       <th> Titulo </th><td> {{ $aviso->titulo }} </td>
@@ -40,6 +40,21 @@
                                     </tr>
                                     <tr>
                                       <th> Categoria </th><td> {{ $aviso->categoria->nombre }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th> Dirección </th><td> {{ $aviso->direccion }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th> Localidad </th><td> {{ $aviso->localidad }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th> Cocina </th><td> {{ $aviso->cocina }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th> Dormitorios </th><td> {{ $aviso->dormitorios }}</td>
+                                    </tr>
+                                    <tr>
+                                      <th> Baños </th><td> {{ $aviso->banios }}</td>
                                     </tr>
 
                                 </tbody>

@@ -19,7 +19,13 @@
                                 @endforeach
                             </ul>
                         @endif
-
+                        @php
+                          foreach ($aviso->foto as $item) {
+                        @endphp
+                            <img src="{{ asset('storage').'/'.$item['ruta']}}" alt="" width="200">
+                        @php
+                          }
+                        @endphp
                         <form method="POST" action="{{ url('/avisos/' . $aviso->id) }}" accept-charset="UTF-8" class="form-horizontal" enctype="multipart/form-data">
                             {{ method_field('PATCH') }}
                             {{ csrf_field() }}

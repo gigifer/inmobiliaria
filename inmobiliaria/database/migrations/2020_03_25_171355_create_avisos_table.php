@@ -16,11 +16,18 @@ class CreateAvisosTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('titulo')->nullable();
-            $table->string('descripcion')->nullable();
+            $table->string('descripcion', 500)->nullable();
             $table->float('precio', 8, 2);
-            $table->unsignedBigInteger('id_categoria');
-            $table->foreign('id_categoria')->references('id')->on('categorias');
+            $table->string('direccion', 30)->nullable();
+            $table->string('localidad', 30)->nullable();
+            $table->string('cocina', 30)->nullable();
+            $table->string('dormitorios', 30)->nullable();
+            $table->string('banios', 30)->nullable();
+            $table->string('gastos', 30)->nullable();
+            $table->string('lat', 50)->nullable();
+            $table->string('lng', 50)->nullable();
             });
+
     }
 
     /**

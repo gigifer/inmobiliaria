@@ -6,9 +6,9 @@
       <div class="card shadow-sm">
         <img src="{{ asset('storage').'/'.$item->foto[0]['ruta']}}" class="card-img-top" alt="..." style="height:220px">
         <div class="card-body">
-          <h5 class="card-title text-center letra">{{$item->titulo}}</h5>
+          <h5 class="card-title text-center letra vistasTitulo">{{$item->titulo}}</h5>
           <p class="card-text letra-clara">{{$item->descripcion}}</p>
-          <p class="letra-clara">${{$item->precio}}</p>
+          <p class="letra">${{$item->precio}}</p>
           <div class="d-flex justify-content-end">
             <a href="{{ route('aviso-detalle', $item->id) }}"><button type="button" class="btn botones letra">VER MÁS</button></a>
           </div>

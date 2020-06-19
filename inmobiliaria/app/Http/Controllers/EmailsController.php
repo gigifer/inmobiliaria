@@ -25,38 +25,24 @@ class EmailsController extends Controller
 
       $this->validate($request, $validacion, $error);
 
-      //Mail::to('fernandezgisela27@gmail.com')->send(new MensajeContacto($dataContacto));
+      $email = new \SendGrid\Mail\Mail();
+      $email->setFrom("morellinoriega@gmail.com", "Morelli Noriega Inmobiliaria");
+      $email->setSubject("Nuevo mensaje en el sitio web: ");
+      $email->addTo("morellinoriega@gmail.com", "Barbara");
+      $email->addContent("text/plain", "De: ". $request['nombre'] . '\n' . $request['mensaje']);
+      $email->addContent("text/html", "<html><body><p><strong>De:</strong> " . $request['nombre'] . "</p>
+      <p><strong>Asunto:</strong> " . $request['asunto'] . "</p>
+      <p><strong>Email:</strong> " . $request['email'] . "</p>
+      <p> " . $request['mensaje'] . " </p></body></html>");
 
-      //Mail::to('fernandezgisela27@gmail.com')->send(new MensajeContacto($mensaje));
-      // return new MensajeContacto($validacion);
+      $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 
-      //require 'vendor/autoload.php';
-      // If you're using Composer (recommended)
-      // Comment out the above line if not using Composer
-      // require("<PATH TO>/sendgrid-php.php");
-      // If not using Composer, uncomment the above line and
-      // download sendgrid-php.zip from the latest release here,
-      // replacing <PATH TO> with the path to the sendgrid-php.php file,
-      // which is included in the download:
-      // https://github.com/sendgrid/sendgrid-php/releases
+      try {
+          $response = $sendgrid->send($email);
+          return response()->json(['success'=>'Mensaje enviado'], 200);
+      } catch (Exception $e) {
+          return response()->json(['error'=>'El mensaje no pudo ser enviado'], 500);
+      }
 
-      //$email = new \SendGrid\Mail\Mail();
-      //$email->setFrom("test@example.com", "Example User");
-      //$email->setSubject("Sending with SendGrid is Fun");
-      //$email->addTo("test@example.com", "Example User");
-      //$email->addContent("text/plain", "and easy to do anywhere, even with PHP");
-      //$email->addContent(
-      //  "text/html", "<strong>and easy to do anywhere, even with PHP</strong>"
-      //);
-      //$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-      //try {
-        //$response = $sendgrid->send($email);
-        //print $response->statusCode() . "\n";
-        //print_r($response->headers());
-        //print $response->body() . "\n";
-      //} catch (Exception $e) {
-        //echo 'Caught exception: '. $e->getMessage() ."\n";
-      //}
-      return response()->json(['success'=>'Mensaje enviado'], 200);
     }
 }

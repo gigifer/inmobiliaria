@@ -15,9 +15,7 @@
 
     <!-- Styles -->
     <style>
-        body {
-          overflow-x: hidden;
-        }
+
         /* Barra de navegación*/
         .navbar{
           background-color: #c11919;
@@ -121,6 +119,14 @@
           text-overflow: ellipsis;
         }
 
+        .vistasTitulo{
+          display: -webkit-box;
+          overflow:hidden;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          text-overflow: ellipsis;
+        }
+
         /*Footer*/
         .redes{
           background-color: #c11919;
@@ -154,7 +160,7 @@
         }
 
         #map {
-          height: 400px;
+          height: 500px;
           width: 100%;
         }
 
@@ -167,7 +173,6 @@
 
         #detalle{
           padding-left: 35px;
-          height: 350px;
         }
     </style>
   </head>
@@ -193,18 +198,21 @@
       @yield('content')
     </div>
     <div class=" container-fliud redes">
-      <div class="row">
-        <div class="col-md-4">
+      <div class="row mr-0 ml-0">
+        <div class="col-ms-4 col-md-3 col-lg-4">
           <i class="fas fa-mobile-alt"></i><p>351-531-3776</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-ms-4 col-md-3 col-lg-4">
           <a href="https://www.facebook.com/barbara.morellinoriega.1" target="_blank"><i class="fab fa-facebook"></i></a>
           <a href="https://www.instagram.com/barbaramorellinoriega/?hl=es-la" target="_blank"><i class="fab fa-instagram"></i></a><p>Seguinos</p>
         </div>
-        <div class="col-md-4">
+        <div class="col-ms-4 col-md-6 col-lg-4">
           <a href="mailto:Mn.bienesinmuebles@gmail.com"><i class="fas fa-envelope-square"></i><p>Mn.bienesinmuebles@gmail.com</p></a>
         </div>
       </div>
+    </div>
+    <div class="" style="position: fixed; bottom: 20px; right: 20px;">
+      <a href="https://api.whatsapp.com/send?phone=5493515313776&text=mensaje"> <img src="{{ asset('img/whatsapp.png') }}" alt="" style="width:70px;"> </a>
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

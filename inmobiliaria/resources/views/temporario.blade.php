@@ -3,14 +3,14 @@
   <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4 vistas" id="temporarios">
     @foreach ($avisosTemporario as $item)
     <div class="col mb-4">
-      <div class="card h-100 shadow-sm">
-        <img src="{{ asset('storage').'/'.$item->foto[0]['ruta']}}" class="card-img-top" alt="...">
+      <div class="card shadow-sm">
+        <img src="{{ asset('storage').'/'.$item->foto[0]['ruta']}}" class="card-img-top" alt="..." style="height:220px">
         <div class="card-body">
-          <h5 class="card-title text-center">{{$item->titulo}}</h5>
-          <p class="card-text text-center">{{$item->descripcion}}</p>
-          <p class="">{{$item->precio}}</p>
+          <h5 class="card-title text-center letra vistasTitulo">{{$item->titulo}}</h5>
+          <p class="card-text letra-clara">{{$item->descripcion}}</p>
+          <p class="letra">${{$item->precio}}</p>
           <div class="d-flex justify-content-end">
-            <a href="{{ route('aviso-detalle', $item->id)}}"><button type="button" class="btn botones">VER MÁS</button></a>
+            <a href="{{ route('aviso-detalle', $item->id)}}"><button type="button" class="btn botones letra">VER MÁS</button></a>
           </div>
         </div>
       </div>
